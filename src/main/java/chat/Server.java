@@ -35,10 +35,43 @@ public class Server extends javax.swing.JFrame {
     private int dao = 100;
     private int cung = 100;
     private int kunai = 100;
-    
-    
-    
-
+    Client a = new Client();
+    public int getKiem(){
+        return this.kiem;
+    }
+    public int getTieu(){
+        return this.tieu;
+    }
+    public int getQuat(){
+        return this.quat;
+    }
+    public int getDao(){
+        return this.dao;
+    }
+    public int getCung(){
+        return this.cung;
+    }
+    public int getKu(){
+        return this.kunai;
+    }
+    public void setKiem(int kiem){
+        this.kiem = kiem;
+    }
+    public void setTieu(int tieu){
+        this.tieu= tieu;
+    }
+    public void setDao(int tieu){
+        this.dao= tieu;
+    }
+    public void setCung(int tieu){
+        this.cung= tieu;
+    }
+    public void setKu(int tieu){
+        this.kunai= tieu;
+    }
+    public void setQuat(int tieu){
+        this.quat= tieu;
+    }
     
     public Server() {
         initComponents();
@@ -378,26 +411,35 @@ public class Server extends javax.swing.JFrame {
                 int qttValue = (int) qttItem.getValue();
                 String combinedData = "trade:"+selectedItem + "," + qttValue;
                 output.writeUTF(combinedData);
-                if ("Kiếm Doujigiri Yasutsuna".equals(selectedItem)) {
+                int ok=0;
+                if ("Kiếm Doujigiri Yasutsuna".equals(selectedItem) && this.getKiem() >= qttValue) {
                     kiem -= qttValue;
+                    ok=1;
+                    a.setKiem(a.getKiem()+1);
                     qttKiem.setText(String.valueOf(kiem));
-                } else if ("Phi Tiêu Shuriken".equals(selectedItem)) {
+                } else if ("Phi Tiêu Shuriken".equals(selectedItem) && this.getTieu() >= qttValue) {
                     tieu -= qttValue;
+                    ok=1;
+                    a.setTieu(a.getTieu()+1);
                     qttTieu.setText(String.valueOf(tieu));
-                } else if ("Quạt ba tiêu".equals(selectedItem)) {
+                } else if ("Quạt ba tiêu".equals(selectedItem) && this.getQuat() >= qttValue) {
                     quat -= qttValue;
+                    ok=1;
                     qttQuat.setText(String.valueOf(quat));
-                } else if ("Đao hải tặc".equals(selectedItem)) {
+                } else if ("Đao hải tặc".equals(selectedItem) && this.getDao() >= qttValue) {
                     dao -= qttValue;
+                    ok=1;
                     qttDao.setText(String.valueOf(dao));
-                } else if ("Cung phong ấn".equals(selectedItem)) {
+                } else if ("Cung phong ấn".equals(selectedItem) && this.getCung() >= qttValue) {
                     cung -= qttValue;
+                    ok=1;
                     qttCung.setText(String.valueOf(cung));
-                } else if ("Kunai".equals(selectedItem)) {
+                } else if ("Kunai".equals(selectedItem) && this.getKu() >= qttValue) {
                     kunai -= qttValue;
+                    ok=1;
                     qttKunai.setText(String.valueOf(kunai));
                 }
-                if(qttValue > 0) model.addElement("Bạn Đã gửi "+qttValue+" "+selectedItem+"!");
+                if(qttValue > 0 && ok==1 && this.getKiem() >= qttValue && this.getTieu() >= qttValue && this.getQuat() >= qttValue && this.getDao() >= qttValue && this.getCung() >= qttValue && this.getKu() >= qttValue) model.addElement("Bạn Đã gửi "+qttValue+" "+selectedItem+"!");
                 lsHistory.setModel(model);
             }
             if(!txtMess.getText().isEmpty()){
@@ -507,24 +549,30 @@ public class Server extends javax.swing.JFrame {
                         String[] tradeData = tradeMessage.split(",");
                         String itemName = tradeData[0];
                         int itemQuantity = Integer.parseInt(tradeData[1]);
-                        if(itemQuantity > 0) model.addElement("Khách đã gửi " + itemQuantity +" "+ itemName +" cho bạn !");
-                        if ("Kiếm Doujigiri Yasutsuna".equals(itemName)) {
+                        if(itemQuantity > 0 && a.getKiem() >= itemQuantity && a.getTieu() >= itemQuantity && a.getQuat() >= itemQuantity && a.getDao() >= itemQuantity && a.getCung() >= itemQuantity && a.getKu() >= itemQuantity) model.addElement("Khách đã gửi " + itemQuantity +" "+ itemName +" cho bạn !" );
+                        if ("Kiếm Doujigiri Yasutsuna".equals(itemName) && a.getKiem() >= itemQuantity) {
                             kiem += itemQuantity;
+                            a.setKiem(a.getKiem()-1);
                             qttKiem.setText(String.valueOf(kiem));
-                        } else if ("Phi Tiêu Shuriken".equals(itemName)) {
+                        } else if ("Phi Tiêu Shuriken".equals(itemName) && a.getTieu() >= itemQuantity) {
                             tieu += itemQuantity;
+                            a.setTieu(a.getTieu()-1);
                             qttTieu.setText(String.valueOf(tieu));
-                        } else if ("Quạt ba tiêu".equals(itemName)) {
+                        } else if ("Quạt ba tiêu".equals(itemName) && a.getQuat() >= itemQuantity) {
                             quat += itemQuantity;
+                            a.setQuat(a.getQuat()-1);
                             qttQuat.setText(String.valueOf(quat));
-                        } else if ("Đao hải tặc".equals(itemName)) {
+                        } else if ("Đao hải tặc".equals(itemName) && a.getDao() >= itemQuantity) {
                             dao += itemQuantity;
+                            a.setDao(a.getDao()-1);
                             qttDao.setText(String.valueOf(dao));
-                        } else if ("Cung phong ấn".equals(itemName)) {
+                        } else if ("Cung phong ấn".equals(itemName) && a.getCung() >= itemQuantity) {
                             cung += itemQuantity;
+                            a.setCung(a.getCung()-1);
                             qttCung.setText(String.valueOf(cung));
-                        } else if ("Kunai".equals(itemName)) {
+                        } else if ("Kunai".equals(itemName) && a.getKu() >= itemQuantity) {
                             kunai += itemQuantity;
+                            a.setKu(a.getKu()-1);
                             qttKunai.setText(String.valueOf(kunai));
                         }
                     }
