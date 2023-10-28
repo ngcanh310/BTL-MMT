@@ -405,9 +405,10 @@ public class Client extends javax.swing.JFrame {
                     kunai -= qttValue;
                     ok=1;
                     qttKunai.setText(String.valueOf(kunai));
-                }
-                if(qttValue > 0 && ok==1 && this.getKiem() >= qttValue && this.getTieu() >= qttValue && this.getQuat() >= qttValue && this.getDao() >= qttValue && this.getCung() >= qttValue && this.getKu() >= qttValue) model.addElement("Bạn Đã gửi "+qttValue+" "+selectedItem+"!");
+                }   
+                if(qttValue > 0 && ok==1) model.addElement("Bạn Đã gửi "+qttValue+" "+selectedItem+"!");
                 lsHistory.setModel(model);
+                
             }
             if(!txtMess.getText().isEmpty()){
                 output.writeUTF(txtMess.getText());
