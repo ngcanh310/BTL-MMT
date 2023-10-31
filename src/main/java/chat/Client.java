@@ -407,8 +407,7 @@ public class Client extends javax.swing.JFrame {
                     qttKunai.setText(String.valueOf(kunai));
                 }   
                 if(qttValue > 0 && ok==1) model.addElement("Bạn Đã gửi "+qttValue+" "+selectedItem+"!");
-                lsHistory.setModel(model);
-                
+                lsHistory.setModel(model);              
             }
             if(!txtMess.getText().isEmpty()){
                 output.writeUTF(txtMess.getText());
