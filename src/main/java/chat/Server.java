@@ -441,6 +441,8 @@ public class Server extends javax.swing.JFrame {
                 }
                 if(qttValue > 0 && ok==1 && this.getKiem() >= qttValue && this.getTieu() >= qttValue && this.getQuat() >= qttValue && this.getDao() >= qttValue && this.getCung() >= qttValue && this.getKu() >= qttValue) model.addElement("Bạn Đã gửi "+qttValue+" "+selectedItem+"!");
                 lsHistory.setModel(model);
+                 lsItem.setSelectedItem("Chưa chọn");
+                qttItem.setValue(0);
             }
             if(!txtMess.getText().isEmpty()){
                 output.writeUTF(txtMess.getText());
@@ -549,7 +551,7 @@ public class Server extends javax.swing.JFrame {
                         String[] tradeData = tradeMessage.split(",");
                         String itemName = tradeData[0];
                         int itemQuantity = Integer.parseInt(tradeData[1]);
-                        if(itemQuantity > 0 && a.getKiem() >= itemQuantity && a.getTieu() >= itemQuantity && a.getQuat() >= itemQuantity && a.getDao() >= itemQuantity && a.getCung() >= itemQuantity && a.getKu() >= itemQuantity) model.addElement("Khách đã gửi " + itemQuantity +" "+ itemName +" cho bạn !" );
+                        if(itemQuantity > 0) model.addElement("Khách đã gửi " + itemQuantity +" "+ itemName +" cho bạn !" );
                         if ("Kiếm Doujigiri Yasutsuna".equals(itemName) && a.getKiem() >= itemQuantity) {
                             kiem += itemQuantity;
                             a.setKiem(a.getKiem()-1);

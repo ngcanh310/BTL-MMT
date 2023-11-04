@@ -55,17 +55,17 @@ public class Client extends javax.swing.JFrame {
     public void setTieu(int tieu){
         this.tieu= tieu;
     }
-    public void setDao(int tieu){
-        this.dao= tieu;
+    public void setDao(int dao){
+        this.dao= dao;
     }
-    public void setCung(int tieu){
-        this.cung= tieu;
+    public void setCung(int cung){
+        this.cung= cung;
     }
-    public void setKu(int tieu){
-        this.kunai= tieu;
+    public void setKu(int ku){
+        this.kunai= ku;
     }
-    public void setQuat(int tieu){
-        this.quat= tieu;
+    public void setQuat(int quat){
+        this.quat= quat;
     }
     
     public Client() {
@@ -407,7 +407,9 @@ public class Client extends javax.swing.JFrame {
                     qttKunai.setText(String.valueOf(kunai));
                 }   
                 if(qttValue > 0 && ok==1) model.addElement("Bạn Đã gửi "+qttValue+" "+selectedItem+"!");
-                lsHistory.setModel(model);              
+                lsHistory.setModel(model); 
+                 lsItem.setSelectedItem("Chưa chọn");
+                qttItem.setValue(0);
             }
             if(!txtMess.getText().isEmpty()){
                 output.writeUTF(txtMess.getText());
